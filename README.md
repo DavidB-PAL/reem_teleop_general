@@ -1,6 +1,7 @@
-**ROS Node:** reem_teleop_general
-=============================
-Copyright (c) 2013, David Butterworth, PAL Robotics S.L.
+ROS Node: reem_teleop_general
+-----------------------------------
+Copyright (c) 2013, David Butterworth, PAL Robotics S.L. 
+<br>
 
 A joystick tele-operation controller for the REEM robot (Gazebo simulation or hardware).<br>
 Uses a joystick to control the arms (currently only joint-based control of left arm), hand, mobile base and head.
@@ -19,11 +20,11 @@ Based on pr2_teleop_general.
 
 
 **Required ROS packages:** <br>
-  joystick_drivers<br>
-  reem_simulation<br>
-  reem_kinematics<br>
+joystick_drivers<br>
+reem_simulation<br>
+reem_kinematics<br>
 
 **Usage:** <br>
-  Plug in Logitech joypad.<br>
-  $ roslaunch reem_gazebo reem_empty_world.launch <br>
-  $ roslaunch reem_teleop_general reem_teleop_joystick.launch <br>
+Plug in Logitech joypad.<br>
+$ roslaunch reem_gazebo reem_empty_world.launch <br>
+$ roslaunch reem_teleop_general reem_teleop_joystick.launch <br>
