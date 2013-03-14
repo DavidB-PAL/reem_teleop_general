@@ -1,0 +1,57 @@
+<launch>
+
+    <!-- Launch Joystick Teleop -->
+    <!-- Control of the head, mobile base & joint-based control of left arm -->
+
+    <!-- The node needs to be fixed so it can launch without IK, if desired -->
+
+
+    <!-- Start USB Joystick eg. Logitech joypad -->
+    <node pkg="joy" type="joy_node" name="joy_node" output="screen" respawn="false" required="true">
+        <param name="dev" type="string" value="/dev/input/js0" />
+
+        <!-- Joystick center deadzone, default is 0.05%  0.12  -->
+        <param name="deadzone" value="0.2" /> 
+    </node>
+
+
+    <!-- Start IK Services -->
+
+    <include file="$(find reem_arm_navigation)/launch/reem_planning_environment.launch" />
+
+    <include file="$(find planning_environment)/launch/environment_server.launch" >
+      <arg name="use_monitor" value="true"/>
+      <arg name="use_collision_map" value="false"/>
+    </include>
+
+    <include file="$(find reem_arm_navigation)/launch/ompl_planning.launch" />
+
+    <!-- was testing left arm IK, but not reliable yet -->
+    <node pkg="arm_kinematics_constraint_aware" type="arm_kinematics_constraint_aware" name="reem_left_arm_kinematics" output="screen">
+        <rosparam command="load" file="$(find reem_arm_navigation)/config/left_arm_kinematics.yaml" />
+    </node>
+
+
+    <!-- Teleop node -->
+
+    <node pkg="reem_teleop_general" type="reem_teleop_joystick" name="reem_teleop_joystick" output="screen">
+
+        <!-- maybe change this to controller name left and right  -->
+        <param name="controller_name" type="string" value="arm_controller"/>
+
+        <!-- Enable these controllers  -->
+  	<param name="control_body" type="bool" value="true"/>
+        <param name="control_head" type="bool" value="true"/>
+        <param name="control_larm" type="bool" value="true"/>
+
+        <!-- Options from original node, not implemented yet  -->
+        <param name="control_rarm" type="bool" value="false"/>
+	<param name="control_prosilica" type="bool" value="false"/>
+  	<param name="walk_along_x_speed_scale" type="double" value="3.0"/>
+  	<param name="walk_along_y_speed_scale" type="double" value="1.0"/>
+  	<param name="walk_along_w_speed_scale" type="double" value="3.0"/>
+  	<param name="walk_along_x_dist_max" type="double" value=".25"/>
+  	<param name="walk_along_y_dist_max" type="double" value=".20"/>
+    </node>
+
+</launch>
