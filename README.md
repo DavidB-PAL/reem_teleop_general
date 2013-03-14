@@ -1,8 +1,7 @@
-## ROS Node: reem_teleop_general
+### ROS Node: reem_teleop_general
 Copyright (c) 2013, David Butterworth, PAL Robotics S.L. 
-
 <br>
-
+<br>
 A joystick tele-operation controller for the REEM robot (Gazebo simulation or hardware).<br>
 Uses a joystick to control the arms (currently only joint-based control of left arm), hand, mobile base and head.
 
